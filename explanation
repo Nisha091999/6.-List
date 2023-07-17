@@ -1,0 +1,79 @@
+
+class UniqueCounter:
+This line declares a class named UniqueCounter.
+
+    def __init__(self, list1):
+        self.list1 = list1
+        self.unique_list = self.unique()
+        self.count_and_multiply = self.count_unique_and_multiply()
+This is the constructor method (__init__) for the UniqueCounter class.
+It takes a parameter list1 and initializes instance variables list1, unique_list, and count_and_multiply.
+self.list1 stores the input list passed to the constructor.
+self.unique_list is initialized by calling the unique() method, which returns a list of unique sublists from list1.
+self.count_and_multiply is initialized by calling the count_unique_and_multiply() method,
+which calculates the count and multiplication results for each sublist in self.unique_list.
+
+
+    def unique(self):
+        unique_lists = []
+        for sublist in self.list1:
+            sublist_set = set(sublist)
+            unique_lists.append(list(sublist_set))
+        return unique_lists
+This method, unique(), takes no arguments and returns a list of unique sublists.
+It initializes an empty list unique_lists to store the unique sublists.
+It iterates over each sublist in self.list1.
+For each sublist, it converts it to a set using set(sublist). 
+A set is an unordered collection of unique elements, so any duplicate elements in the sublist will be removed.
+The resulting set is converted back to a list using list(sublist_set) to preserve the original order of elements.
+The unique sublist is then appended to unique_lists.
+Finally, unique_lists is returned.
+
+
+    def count_unique_and_multiply(self):
+        result = []
+        for sublist in self.unique_list:
+            unique_count = len(sublist)
+            product = 1
+            for num in sublist:
+                product *= num
+            result.append((unique_count, product))
+        return result
+This method, count_unique_and_multiply(), takes no arguments and returns a list of tuples containing the count and 
+product for each unique sublist.
+It initializes an empty list result to store the count and product tuples.
+It iterates over each sublist in self.unique_list (the list of unique sublists).
+For each sublist, it calculates the length of the sublist using len(sublist) and assigns it to unique_count.
+It initializes a variable product with a value of 1.
+It then iterates over each number (num) in the sublist and multiplies it with product.
+The final product value and unique_count are appended as a tuple (unique_count, product) to result.
+Finally, result is returned.
+
+
+list1 = [[27, 9, 2, 8, 8, 9, 27, 8], [1, 18, 2, 1, 18, 4, 4, 1], [1, 5, 7, 5, 8, 7, 4, 5], [1, 2, 3, 5, 8, 4, 4, 3]]
+
+counter = UniqueCounter(list1)
+These lines define the input list list1 and create an instance of the UniqueCounter class named counter with list1 as the argument.
+
+
+print(counter.unique_list)
+print(counter.count_and_multiply)
+These lines print the unique_list and count_and_multiply attributes of the counter instance,
+which were computed during initialization. The unique_list contains the list of unique sublists, 
+and count_and_multiply contains the count and multiplication results for each unique sublist.
+
+
+counts = []
+multiplications = []
+
+for count, multi in counter.count_and_multiply:
+    counts.append(count)
+    multiplications.append(multi)
+
+print("Counts:", counts)
+print("Multiplications:", multiplications)
+These lines extract the count and multiplication results from the counter.
+count_and_multiply attribute and store them in separate lists counts and multiplications.
+It iterates over each tuple (count, multi) in counter.count_and_multiply.
+For each tuple, it appends the count to the counts list and the multi to the multiplications list.
+Finally, it prints the contents of counts and multiplications.
