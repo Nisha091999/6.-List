@@ -1,32 +1,41 @@
-def unique(list1):
-    unique_lists = []
-    for sublist in list1:
-        sublist_set = set(sublist)
-        unique_lists.append(list(sublist_set))
-    return unique_lists
+class UniqueCounter:
+    def __init__(self, list1):
+        self.list1 = list1
+        self.unique_list = self.unique()
+        self.count_and_multiply = self.count_unique_and_multiply()
+
+    def unique(self):
+        unique_lists = []
+        for sublist in self.list1:
+            sublist_set = set(sublist)
+            unique_lists.append(list(sublist_set))
+        return unique_lists
+
+    def count_unique_and_multiply(self):
+        result = []
+        for sublist in self.unique_list:
+            unique_count = len(sublist)
+            product = 1
+            for num in sublist:
+                product *= num
+            result.append((unique_count, product))
+        return result
 
 
-def count_unique_and_multiply(list1):
-    result = []
-    for sublist in list1:
-        unique_count = len(sublist)
-        product = 1
-        for num in sublist:
-            product *= num
-        result.append((unique_count, product))
-    return result
+# driver code
+list1 = [[27, 9, 2, 8, 8, 9, 27, 8], [1, 18, 2, 1, 18, 4, 4, 1], [1, 5, 7, 5, 8, 7, 4, 5], [1, 2, 3, 5, 8, 4, 4, 3]]
 
-# driver codeṇ
-list1 = [[27, 9, 2, 8, 8, 9, 27, 8], [1, 18, 2, 1, 18, 4, 4, 1]]
-unique_list = unique(list1)
-count_and_multiply = count_unique_and_multiply(unique_list)
-print(count_and_multiply)
+counter = UniqueCounter(list1)
+
+# Access the unique_list and count_and_multiply results
+print(counter.unique_list)
+print(counter.count_and_multiply)
 
 # Separate count and multiplication results
 counts = []
 multiplications = []
 
-for count, multi in count_and_multiply:
+for count, multi in counter.count_and_multiply:
     counts.append(count)
     multiplications.append(multi)
 
